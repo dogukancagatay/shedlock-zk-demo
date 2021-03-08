@@ -1,8 +1,18 @@
 version: "3"
 services:
 
-  zk:
+  zookeeper:
     image: zookeeper:3.6.2
     ports:
       - 2181:2181
     restart: unless-stopped
+
+  app1:
+    build: ./
+    depends_on:
+      - zookeeper
+
+  app2:
+    build: ./
+    depends_on:
+      - zookeeper
